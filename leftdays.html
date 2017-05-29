@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "UTF-8">
+		<title>第112回医師国家試験まであと何日</title>
+		<style>
+			body{
+				background-color:#AAAAFF;
+			}
+			.contents{
+				margin:150px auto;
+				text-align: center;
+			}
+			h2 {
+				font-size:80px;
+			}
+			.timer{
+				font-size: 50px;
+			}
+			#day{
+				font-size:80px;
+			}
+			#hour{
+				font-size:80px;
+			}
+			#min{
+				font-size:80px;
+			}
+			#sec{
+				font-size:80px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class = "contents">
+			<h2>第112回医師国家試験まで</h2>
+			<br>
+			<br>
+			<p class = "timer">あと<span id = "day">〇</span>日<span id = "hour">〇</span>時間<span id ="min">〇</span>分<span id = "sec">〇</span>秒</p>
+		</div>
+		<script>
+			var countdown = function(due){
+				
+				var now = new Date();		
+				var rest = due.getTime()- now.getTime();
+				var sec = Math.floor(rest / 1000 ) % 60;
+				var min = Math.floor(rest / 1000 / 60 ) % 60;
+				var hour = Math.floor(rest / 1000 / 60 / 60) % 24;
+				var day = Math.floor(rest / 1000 / 60 / 60 / 24) % 365 ;
+				
+				var count = [day, hour, min, sec];
+				
+				var secA = now.getSeconds();
+				var minA = now.getMinutes();
+				var hourA = now.getHours();
+				var dayA = now.getDate();
+				var monthA = now.getMonth()+1;
+				console.log('現在　：　' + monthA + '月' + dayA + '日' +　hourA +'時' + minA + '分' + secA +'秒' );
+
+				return count;	
+			}
+			var X_YEAR = 2018,
+				X_MONTH = 2,
+				X_DAY = 10,
+				X_HOUR = 0,
+				X_MINITE = 0,
+				X_SECOND = 0;
+			var test = new Date(X_YEAR, X_MONTH - 1, X_DAY, X_HOUR, X_MINITE, X_SECOND);
+			var again  = function(){
+				var counter = countdown(test);
+				document.getElementById('day').textContent = counter[0];
+				document.getElementById('hour').textContent = counter[1];
+				document.getElementById('min').textContent = counter[2];
+				document.getElementById('sec').textContent = counter[3];
+				refresh();
+			}
+			
+			var refresh = function() {
+				setTimeout(again , 1000);
+			}
+			
+			again();
+			
+		</script>
+	</body>
+</html>
